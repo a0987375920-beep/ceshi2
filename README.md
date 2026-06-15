@@ -31,10 +31,15 @@
             list-style: none;
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
             margin: 0;
         }
-        .top-nav li { display: inline; white-space: nowrap; }
+        /* 修复老式浏览器不支持gap，改用margin实现间距 */
+        .top-nav li { 
+            display: inline; 
+            white-space: nowrap;
+            margin-right: 12px;
+        }
+        .top-nav li:last-child { margin-right: 0; }
         .top-nav a { color: #003366; text-decoration: none; }
         .top-nav a:hover { text-decoration: underline; color: #CC0000; }
         .row { display: flex; background: #FFFFFF; }
@@ -107,14 +112,12 @@
         .thumb-portrait { width: 80px; height: 80px; }
         .thumb-square { width: 80px; height: 80px; }
         .clearfix::after { content: ""; clear: both; display: table; }
-        /* 广告网格 */
+        /* 广告网格 修复gap兼容性 */
         .ad-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
             margin: 15px 0;
         }
-        /* 广告方块样式：统一显示“链接已丢失” */
         .ad-linklost {
             width: 85px;
             height: 85px;
@@ -128,7 +131,11 @@
             color: #CC0000;
             text-align: center;
             cursor: default;
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
+        /* 广告方块样式：统一显示“链接已丢失” */
+        .ad-linklost:nth-child(5n) { margin-right: 0; }
         .reply-item {
             margin-bottom: 12px;
             padding-left: 14px;
@@ -139,8 +146,16 @@
         .reply-item:before { content: "○"; color: #666; position: absolute; left: 0; top: 0; font-size: 11px; }
         .reply-author { font-weight: bold; color: #336699; }
         .sidebar-footer { margin-top: 25px; padding-top: 12px; border-top: 1px dashed #CC9966; font-size: 11px; }
-        .icon-row { display: flex; gap: 8px; margin: 8px 0; }
-        .func-icon { background: #E0D6C8; padding: 3px 8px; font-size: 11px; display: inline-block; border: 1px solid #AA9F7E; }
+        .icon-row { display: flex; margin: 8px 0; }
+        .func-icon { 
+            background: #E0D6C8; 
+            padding: 3px 8px; 
+            font-size: 11px; 
+            display: inline-block; 
+            border: 1px solid #AA9F7E;
+            margin-right: 8px;
+        }
+        .func-icon:last-child { margin-right: 0; }
         hr { border: none; border-top: 1px dotted #CCCCAA; }
         a { text-decoration: none; }
         ul, li { list-style: none; }
@@ -150,10 +165,18 @@
 <div class="container">
     <div class="top-nav">
         <ul>
-            <li><a href="#">首 页</a></li><li><a href="#">新 闻</a></li><li><a href="#">娱 乐</a></li>
-            <li><a href="#">体 育</a></li><li><a href="#">论 坛</a></li><li><a href="#">博 客</a></li>
-            <li><a href="#">相 册</a></li><li><a href="#">留 言</a></li><li><a href="#">邮 箱</a></li>
-            <li><a href="#">聊天室</a></li><li><a href="#">下载中心</a></li><li><a href="#">同学录</a></li>
+            <li><a href="#">首 页</a></li>
+            <li><a href="#">新 闻</a></li>
+            <li><a href="#">娱 乐</a></li>
+            <li><a href="#">体 育</a></li>
+            <li><a href="#">论 坛</a></li>
+            <li><a href="#">博 客</a></li>
+            <li><a href="#">相 册</a></li>
+            <li><a href="#">留 言</a></li>
+            <li><a href="#">邮 箱</a></li>
+            <li><a href="#">聊天室</a></li>
+            <li><a href="#">下载中心</a></li>
+            <li><a href="#">同学录</a></li>
             <li><a href="#">在线音乐</a></li>
         </ul>
     </div>
@@ -212,29 +235,53 @@
                     后来就失联了。<br>
                     如果你认识她，或者你就是她，请私信我。
                 </div>
-</div>
-            <div class="thumb thumb-portrait" style="float:right; margin: 8px 0 8px 12px;">
-                <div>图片已丢失</div>
+            </div>
+            <div class="clearfix">
+                <div class="thumb thumb-portrait" style="float:right; margin: 8px 0 8px 12px;">
+                    <div>图片已丢失</div>
+                </div>
             </div>
             <div style="margin-top: 12px;">
                 这是她当年给我的贴吧链接： <a href="#" style="color:#0000CC; text-decoration:underline;">【小雨の秘密基地】（以后会做）</a><br>
                 <span style="font-size:11px; color:#886644;">※ 链接还没做好，以后会指向一个真实的贴吧页面。</span><br><br>
                 不知道她现在过得好不好…… ☹
             </div>
-            <div class="thumb thumb-square" style="float:left; margin: 10px 12px 5px 0;">
-                <div>图片已丢失</div>
+            <div class="clearfix">
+                <div class="thumb thumb-square" style="float:left; margin: 10px 12px 5px 0;">
+                    <div>图片已丢失</div>
+                </div>
             </div>
-            <div class="clearfix"></div>
             <div class="block-title" style="margin-top: 20px;">▍ 网友回复</div>
-            <div class="reply-item"><span class="reply-author">过路云</span> <span class="news-meta">2009-03-22 09:13</span><div class="reply-content">这个论坛好古老了，居然真有人。</div></div>
-            <div class="reply-item"><span class="reply-author">北方的狼</span> <span class="news-meta">2009-03-22 14:02</span><div class="reply-content">在网上找一个人不就是大海捞针吗？</div></div>
-            <div class="reply-item"><span class="reply-author">向日葵</span> <span class="news-meta">2009-03-23 00:17</span><div class="reply-content">加油哦 ☹</div></div>
-            <div class="reply-item"><span class="reply-author">罪</span> <span class="news-meta">2009-03-23 00:17</span><div class="reply-content">加油啊</div></div>
-            <div class="reply-item"><span class="reply-author">匿名</span> <span class="news-meta">2009-03-23 19:40</span><div class="reply-content">顶</div></div>
-            <div class="thumb thumb-landscape" style="margin: 15px 10px 5px 0; float: left;">
-                <div>图片已丢失</div>
+            <div class="reply-item">
+                <span class="reply-author">过路云</span> 
+                <span class="news-meta">2009-03-22 09:13</span>
+                <div class="reply-content">这个论坛好古老了，居然真有人。</div>
             </div>
-            <div style="clear:both;"></div>
+            <div class="reply-item">
+                <span class="reply-author">北方的狼</span> 
+                <span class="news-meta">2009-03-22 14:02</span>
+                <div class="reply-content">在网上找一个人不就是大海捞针吗？</div>
+            </div>
+            <div class="reply-item">
+                <span class="reply-author">向日葵</span> 
+                <span class="news-meta">2009-03-23 00:17</span>
+                <div class="reply-content">加油哦 ☹</div>
+            </div>
+            <div class="reply-item">
+                <span class="reply-author">罪</span> 
+                <span class="news-meta">2009-03-23 00:17</span>
+                <div class="reply-content">加油啊</div>
+            </div>
+            <div class="reply-item">
+                <span class="reply-author">匿名</span> 
+                <span class="news-meta">2009-03-23 19:40</span>
+                <div class="reply-content">顶</div>
+            </div>
+            <div class="clearfix">
+                <div class="thumb thumb-landscape" style="margin: 15px 10px 5px 0; float: left;">
+                    <div>图片已丢失</div>
+                </div>
+            </div>
             <div style="font-size: 11px; text-align: center; border-top: 1px solid #DDCCAA; margin-top: 20px; padding-top: 10px;">
                 ☆ 本论坛建于2005年 ☆ 最佳分辨率1024*768 ☆<br>
                 © 梦之论坛 讨论那些想说却不敢说的秘密
